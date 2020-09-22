@@ -230,4 +230,3 @@ class TestPawns:
 
         # Assert
         assert Square.at(4, 0) in moves
-

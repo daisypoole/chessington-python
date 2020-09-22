@@ -41,24 +41,23 @@ class Pawn(Piece):
             white = self.player == Player.WHITE
 
             currentP = board.find_piece(self)
-            boardpiece = board.find_piece(self)
 
             if white:
-                if currentP.row == 1:
-                    chessPiece.append(Square.at(currentP.row+2, currentP.col))
+                squareone = Square.at(currentP.row+1, currentP.col)
+                if board.get_piece(squareone) is None:
+                    chessPiece.append(Square.at(currentP.row + 1, currentP.col))
 
-                elif currentP.row == 1 and boardpiece == currentP.row+1:
-                    chessPiece.append(Square.at(currentP.row, currentP.col))
+                    if currentP.row == 1 and board.get_piece(Square.at(currentP.row+2, currentP.col)) is None:
+                        chessPiece.append(Square.at(currentP.row+2, currentP.col))
 
-                elif currentP.row == 2:
-                    chessPiece.append(Square.at(currentP.row+1, currentP.col))
 
             else:
-                if currentP.row == 6:
-                    chessPiece.append(Square.at(currentP.row-2, currentP.col))
+                squareone = Square.at(currentP.row  -1, currentP.col)
+                if board.get_piece(squareone) is None:
+                    chessPiece.append(Square.at(currentP.row - 1, currentP.col))
 
-                chessPiece.append(Square.at(currentP.row-1, currentP.col))
-
+                    if currentP.row == 6 and board.get_piece(Square.at(currentP.row - 2, currentP.col)) is None:
+                        chessPiece.append(Square.at(currentP.row - 2, currentP.col))
 
             return chessPiece
 
