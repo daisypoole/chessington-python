@@ -39,13 +39,19 @@ class Pawn(Piece):
             chessPiece = []
 
             white = self.player == Player.WHITE
+
             currentP = board.find_piece(self)
+            boardpiece = board.find_piece(self)
 
             if white:
                 if currentP.row == 1:
                     chessPiece.append(Square.at(currentP.row+2, currentP.col))
 
-                chessPiece.append(Square.at(currentP.row+1, currentP.col))
+                elif currentP.row == 1 and boardpiece == currentP.row+1:
+                    chessPiece.append(Square.at(currentP.row, currentP.col))
+
+                elif currentP.row == 2:
+                    chessPiece.append(Square.at(currentP.row+1, currentP.col))
 
             else:
                 if currentP.row == 6:
@@ -95,7 +101,12 @@ class Rook(Piece):
             castle.append(Square.at(currentP.row+6, currentP.col))
 
         else:
-            castle.append(Square.at(currentP.row+6, currentP.col))
+            castle.append(Square.at(currentP.row-1, currentP.col))
+            castle.append(Square.at(currentP.row-2, currentP.col))
+            castle.append(Square.at(currentP.row-3, currentP.col))
+            castle.append(Square.at(currentP.row-4, currentP.col))
+            castle.append(Square.at(currentP.row-5, currentP.col))
+            castle.append(Square.at(currentP.row-6, currentP.col))
 
         return castle
 

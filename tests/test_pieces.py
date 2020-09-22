@@ -1,6 +1,7 @@
 from chessington.engine.board import Board
 from chessington.engine.data import Player, Square
 from chessington.engine.pieces import Pawn
+from chessington.engine.pieces import Rook
 
 class TestPawns:
 
@@ -213,3 +214,20 @@ class TestPawns:
 
         # Assert
         assert Square.at(4, 4) not in moves
+
+
+    @staticmethod
+    def test_white_rook_can_move_up_board():
+
+        # Arrange
+        board = Board.empty()
+        rook = Rook(Player.WHITE)
+        square = Square.at(0, 0)
+        board.set_piece(square, rook)
+
+        # Act
+        moves = rook.get_available_moves(board)
+
+        # Assert
+        assert Square.at(4, 0) in moves
+
