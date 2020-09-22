@@ -35,7 +35,26 @@ class Pawn(Piece):
     """
 
     def get_available_moves(self, board):
-        return []
+
+            chessPiece = []
+
+            white = self.player == Player.WHITE
+            currentP = board.find_piece(self)
+
+            if white:
+                if currentP.row == 1:
+                    chessPiece.append(Square.at(currentP.row+2, currentP.col))
+
+                chessPiece.append(Square.at(currentP.row+1, currentP.col))
+
+            else:
+                if currentP.row == 6:
+                    chessPiece.append(Square.at(currentP.row-2, currentP.col))
+
+                chessPiece.append(Square.at(currentP.row-1, currentP.col))
+
+
+            return chessPiece
 
 
 class Knight(Piece):
@@ -62,7 +81,23 @@ class Rook(Piece):
     """
 
     def get_available_moves(self, board):
-        return []
+        castle = []
+
+        white = self.player == Player.WHITE
+        currentP = board.find_piece(self)
+
+        if white:
+            castle.append(Square.at(currentP.row+1, currentP.col))
+            castle.append(Square.at(currentP.row+2, currentP.col))
+            castle.append(Square.at(currentP.row+3, currentP.col))
+            castle.append(Square.at(currentP.row+4, currentP.col))
+            castle.append(Square.at(currentP.row+5, currentP.col))
+            castle.append(Square.at(currentP.row+6, currentP.col))
+
+        else:
+            castle.append(Square.at(currentP.row+6, currentP.col))
+
+        return castle
 
 
 class Queen(Piece):
