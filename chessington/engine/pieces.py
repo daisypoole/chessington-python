@@ -111,7 +111,8 @@ class Rook(Piece):
     """
 
     def get_available_moves(self, board):
-        castle = []
+        castleUp = []
+        castleDown = []
 
         white = self.player == Player.WHITE
         currentP = board.find_piece(self)
@@ -120,21 +121,29 @@ class Rook(Piece):
             #squareone = Square.at(currentP.row + 1 and currentP.row+6, currentP.col)
             #if board.get_piece(squareone) is None:
 
-            castle.append(Square.at(currentP.row+1 and currentP.row, currentP.col+1))
-            castle.append(Square.at(currentP.row+2, currentP.row))
-            castle.append(Square.at(currentP.row+3, currentP.row))
-            castle.append(Square.at(currentP.row+4, currentP.col))
-            castle.append(Square.at(currentP.row+5, currentP.col))
-            castle.append(Square.at(currentP.row+6, currentP.col))
+            castleUp.append(Square.at(currentP.row+1, currentP.col))
+            castleDown.append(Square.at(currentP.row, currentP.col+1))
+            castleUp.append(Square.at(currentP.row+2, currentP.row))
+            castleDown.append(Square.at(currentP.row, currentP.col + 2))
+            castleUp.append(Square.at(currentP.row+3, currentP.row))
+            castleDown.append(Square.at(currentP.row, currentP.col + 3))
+            castleUp.append(Square.at(currentP.row+4, currentP.col))
+            castleDown.append(Square.at(currentP.row, currentP.col + 4))
+            castleUp.append(Square.at(currentP.row+5, currentP.col))
+            castleDown.append(Square.at(currentP.row, currentP.col + 5))
+            castleUp.append(Square.at(currentP.row+6, currentP.col))
+            castleDown.append(Square.at(currentP.row, currentP.col + 6))
 
 
         else:
-            castle.append(Square.at(currentP.row-1, currentP.col))
-            castle.append(Square.at(currentP.row-2, currentP.col))
-            castle.append(Square.at(currentP.row-3, currentP.col))
-            castle.append(Square.at(currentP.row-4, currentP.col))
-            castle.append(Square.at(currentP.row-5, currentP.col))
-            castle.append(Square.at(currentP.row-6, currentP.col))
+            castleUp.append(Square.at(currentP.row-1, currentP.col))
+            castleUp.append(Square.at(currentP.row-2, currentP.col))
+            castleUp.append(Square.at(currentP.row-3, currentP.col))
+            castleUp.append(Square.at(currentP.row-4, currentP.col))
+            castleUp.append(Square.at(currentP.row-5, currentP.col))
+            castleUp.append(Square.at(currentP.row-6, currentP.col))
+
+        castle = castleUp + castleDown
 
         return castle
 
