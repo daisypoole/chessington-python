@@ -365,3 +365,22 @@ class TestPawns:
 
         # Assert
         assert len(moves) == 0
+
+    @staticmethod
+    def test_white_rook_cannot_move_if_white_piece_4_spaces_in_front():
+        # Arrange
+        board = Board.empty()
+        rook = Rook(Player.WHITE)
+        rook_square = Square.at(0, 0)
+        board.set_piece(rook_square, rook)
+
+        obstructing_square = Square.at(4, 0)
+        obstruction = Pawn(Player.WHITE)
+        board.set_piece(obstructing_square, obstruction)
+
+        # Act
+        moves = rook.get_available_moves(board)
+
+        # Assert
+        assert len(moves) == 0
+
