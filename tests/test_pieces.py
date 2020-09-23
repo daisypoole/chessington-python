@@ -357,7 +357,7 @@ class TestPawns:
         board.set_piece(rook_square, rook)
 
         obstructing_square = Square.at(1, 0)
-        obstruction = Pawn(Player.BLACK)
+        obstruction = Pawn(Player.WHITE)
         board.set_piece(obstructing_square, obstruction)
 
         # Act
