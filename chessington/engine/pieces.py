@@ -54,6 +54,16 @@ class Pawn(Piece):
 
                     if currentP.row == 1 and board.get_piece(Square.at(currentP.row+2, currentP.col)) is None:
                         chessPiece.append(Square.at(currentP.row+2, currentP.col))
+
+                if currentP.col + 1 <= BOARD_MAX:
+                    capturedPiece = board.get_piece(Square.at(currentP.row + 1, currentP.col + 1))
+                    if capturedPiece and capturedPiece.player == Player.BLACK:
+                        chessPiece.append(Square.at(currentP.row + 1, currentP.col + 1))
+                if currentP.col - 1 >= BOARD_MIN:
+                    capturedPiece = board.get_piece(Square.at(currentP.row + 1, currentP.col - 1))
+                    if capturedPiece and capturedPiece.player == Player.BLACK:
+                        chessPiece.append(Square.at(currentP.row + 1, currentP.col - 1))
+
             else:
                 if currentP.row == BOARD_MIN:
                     return []
@@ -64,6 +74,15 @@ class Pawn(Piece):
 
                     if currentP.row == 6 and board.get_piece(Square.at(currentP.row - 2, currentP.col)) is None:
                         chessPiece.append(Square.at(currentP.row - 2, currentP.col))
+
+                if currentP.col + 1 <= BOARD_MAX:
+                    capturedPiece = board.get_piece(Square.at(currentP.row - 1, currentP.col + 1))
+                    if capturedPiece and capturedPiece.player == Player.WHITE:
+                        chessPiece.append(Square.at(currentP.row - 1, currentP.col + 1))
+                if currentP.col - 1 >= BOARD_MIN:
+                    capturedPiece = board.get_piece(Square.at(currentP.row - 1, currentP.col - 1))
+                    if capturedPiece and capturedPiece.player == Player.WHITE:
+                        chessPiece.append(Square.at(currentP.row - 1, currentP.col - 1))
 
             return chessPiece
 
