@@ -46,22 +46,19 @@ class Pawn(Piece):
 
             currentP = board.find_piece(self)
 
-            if white:
-                #if BOARD_MIN <= currentP.row <= BOARD_MAX and BOARD_MIN <= currentP.col <= BOARD_MAX:
-                    #board.get_piece(chessPiece)
+            if BOARD_MIN <= currentP.row <= BOARD_MAX and BOARD_MIN <= currentP.col <= BOARD_MAX:
+                board.get_piece(chessPiece)
 
-                squareone = Square.at(currentP.row+1, currentP.col)
+                if white:
+                    squareone = Square.at(currentP.row+1, currentP.col)
+                    if board.get_piece(squareone) is None:
+                        chessPiece.append(Square.at(currentP.row + 1, currentP.col))
 
-                if board.get_piece(squareone) is None:
-                    chessPiece.append(Square.at(currentP.row + 1, currentP.col))
+                        if currentP.row == 1 and board.get_piece(Square.at(currentP.row+2, currentP.col)) is None:
+                            chessPiece.append(Square.at(currentP.row+2, currentP.col))
 
-                    if currentP.row == 1 and board.get_piece(Square.at(currentP.row+2, currentP.col)) is None:
-                        chessPiece.append(Square.at(currentP.row+2, currentP.col))
-
-                #elif BOARD_MIN <= currentP.row <= BOARD_MAX and BOARD_MIN <= currentP.col <= BOARD_MAX is None:
-                    #return False
-
-
+            elif BOARD_MIN <= currentP.row <= BOARD_MAX and BOARD_MIN <= currentP.col <= BOARD_MAX is None:
+                return False
 
 
             else:
