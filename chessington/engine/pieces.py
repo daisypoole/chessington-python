@@ -5,6 +5,10 @@ Definitions of each of the different chess pieces.
 from abc import ABC, abstractmethod
 
 from chessington.engine.data import Player, Square
+from abc import ABC, abstractmethod
+
+BOARD_MAX = 7
+BOARD_MIN = 0
 
 class Piece(ABC):
     """
@@ -43,16 +47,25 @@ class Pawn(Piece):
             currentP = board.find_piece(self)
 
             if white:
+                #if BOARD_MIN <= currentP.row <= BOARD_MAX and BOARD_MIN <= currentP.col <= BOARD_MAX:
+                    #board.get_piece(chessPiece)
+
                 squareone = Square.at(currentP.row+1, currentP.col)
+
                 if board.get_piece(squareone) is None:
                     chessPiece.append(Square.at(currentP.row + 1, currentP.col))
 
                     if currentP.row == 1 and board.get_piece(Square.at(currentP.row+2, currentP.col)) is None:
                         chessPiece.append(Square.at(currentP.row+2, currentP.col))
 
+                #elif BOARD_MIN <= currentP.row <= BOARD_MAX and BOARD_MIN <= currentP.col <= BOARD_MAX is None:
+                    #return False
+
+
+
 
             else:
-                squareone = Square.at(currentP.row  -1, currentP.col)
+                squareone = Square.at(currentP.row - 1, currentP.col)
                 if board.get_piece(squareone) is None:
                     chessPiece.append(Square.at(currentP.row - 1, currentP.col))
 
