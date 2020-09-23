@@ -348,3 +348,20 @@ class TestPawns:
         # Assert
         assert Square.at(4, 0) in moves
 
+    @staticmethod
+    def test_white_rook_cannot_move_if_white_piece_in_front():
+        # Arrange
+        board = Board.empty()
+        rook = Rook(Player.WHITE)
+        rook_square = Square.at(0, 0)
+        board.set_piece(rook_square, rook)
+
+        obstructing_square = Square.at(1, 0)
+        obstruction = Pawn(Player.BLACK)
+        board.set_piece(obstructing_square, obstruction)
+
+        # Act
+        moves = rook.get_available_moves(board)
+
+        # Assert
+        assert len(moves) == 0
