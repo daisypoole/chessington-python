@@ -115,12 +115,12 @@ class Bishop(Piece):
 
             #diagonal = Square.at(currentP.row+1, currentP.col + 1)
 
-            for piece in range(currentP.col+1, BOARD_MAX + 1):
-                if board.get_piece(Square.at(currentP.row+1, currentP.col+1)) is None:
-                    bishop.append(Square.at(currentP.row+1, currentP.col+1))
+            for i in range(max(currentP.row + 1, currentP.col+1), BOARD_MAX + 1):
+                if board.get_piece(Square.at(i, i)) is None:
+                    bishop.append(Square.at(i, i))
                 else:
-                    if board.get_piece(Square.at(currentP.row, piece)).player is not self.player:
-                        bishop.append(Square.at(currentP.row, piece))
+                    if board.get_piece(Square.at(i, i)).player is not self.player:
+                        bishop.append(Square.at(i, i))
                     break
 
         return bishop
