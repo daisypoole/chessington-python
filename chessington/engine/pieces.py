@@ -102,7 +102,28 @@ class Bishop(Piece):
     """
 
     def get_available_moves(self, board):
-        return []
+
+        bishop = []
+
+        white = self.player == Player.WHITE
+        currentP = board.find_piece(self)
+
+        if white:
+
+            if currentP.row == BOARD_MAX:
+                return[]
+
+            #diagonal = Square.at(currentP.row+1, currentP.col + 1)
+
+            for piece in range(currentP.col+1, BOARD_MAX + 1):
+                if board.get_piece(Square.at(currentP.row+1, currentP.col+1)) is None:
+                    bishop.append(Square.at(currentP.row+1, currentP.col+1))
+                else:
+                    if board.get_piece(Square.at(currentP.row, piece)).player is not self.player:
+                        bishop.append(Square.at(currentP.row, piece))
+                    break
+
+        return bishop
 
 
 class Rook(Piece):
@@ -152,10 +173,6 @@ class Rook(Piece):
                 if board.get_piece(Square.at(currentP.row, i)).player is not self.player:
                     castle.append(Square.at(currentP.row, i))
                 break
-
-
-
-
 
         return castle
 
