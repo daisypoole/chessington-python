@@ -105,22 +105,24 @@ class Bishop(Piece):
 
         bishop = []
 
-        white = self.player == Player.WHITE
         currentP = board.find_piece(self)
 
-        if white:
-
-            if currentP.row == BOARD_MAX:
-                return[]
-
-            #diagonal = Square.at(currentP.row+1, currentP.col + 1)
-
-            for piece in range(currentP.col+1, BOARD_MAX + 1):
-                if board.get_piece(Square.at(currentP.row+1, currentP.col+1)) is None:
-                    bishop.append(Square.at(currentP.row+1, currentP.col+1))
+        # Up and right motion
+        if currentP.row >= currentP.col:
+            for i in range(currentP.row + 1, BOARD_MAX + 1):
+                if board.get_piece(Square.at(i, i + (currentP.col - currentP.row))) is None:
+                    bishop.append(Square.at(i, i + (currentP.col - currentP.row)))
                 else:
-                    if board.get_piece(Square.at(currentP.row, piece)).player is not self.player:
-                        bishop.append(Square.at(currentP.row, piece))
+                    if board.get_piece(Square.at(i, i + (currentP.col - currentP.row))).player is not self.player:
+                        bishop.append(Square.at(i, i + (currentP.col - currentP.row)))
+                    break
+        else:
+            for i in range(currentP.col + 1, BOARD_MAX + 1):
+                if board.get_piece(Square.at(i + (currentP.row - currentP.col), i)) is None:
+                    bishop.append(Square.at(i + (currentP.row - currentP.col), i))
+                else:
+                    if board.get_piece(Square.at(i + (currentP.row - currentP.col), i)).player is not self.player:
+                        bishop.append(Square.at(i + (currentP.row - currentP.col), i))
                     break
 
         return bishop
